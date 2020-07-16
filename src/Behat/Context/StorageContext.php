@@ -11,12 +11,13 @@
 namespace Ynlo\GraphQLBundle\Behat\Context;
 
 use Behat\Behat\Context\Context;
+use Ynlo\GraphQLBundle\Behat\Storage\StorageAwareInterface;
 use Ynlo\GraphQLBundle\Behat\Storage\StorageAwareTrait;
 
 /**
  * Work with the storage to save values temporarily to re-use during steps
  */
-final class StorageContext implements Context
+final class StorageContext implements Context, StorageAwareInterface
 {
     use StorageAwareTrait;
 

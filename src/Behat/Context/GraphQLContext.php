@@ -18,6 +18,7 @@ use Symfony\Component\Filesystem\Exception\FileNotFoundException;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
+use Ynlo\GraphQLBundle\Behat\Client\ClientAwareInterface;
 use Ynlo\GraphQLBundle\Behat\Client\ClientAwareTrait;
 use Ynlo\GraphQLBundle\Behat\Gherkin\YamlStringNode;
 
@@ -27,7 +28,7 @@ use Ynlo\GraphQLBundle\Behat\Gherkin\YamlStringNode;
  *
  * @property File $currentFeatureFile
  */
-final class GraphQLContext implements Context
+final class GraphQLContext implements Context, ClientAwareInterface
 {
     use ClientAwareTrait;
 

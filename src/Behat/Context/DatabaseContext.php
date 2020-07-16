@@ -14,13 +14,14 @@ use Behat\Behat\Context\Context;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query\ResultSetMapping;
 use PHPUnit\Framework\Assert;
+use Ynlo\GraphQLBundle\Behat\Client\ClientAwareInterface;
 use Ynlo\GraphQLBundle\Behat\Client\ClientAwareTrait;
 use Ynlo\GraphQLBundle\Behat\Gherkin\YamlStringNode;
 
 /**
  * Context for database integration
  */
-final class DatabaseContext implements Context
+final class DatabaseContext implements Context, ClientAwareInterface
 {
     use ClientAwareTrait;
 

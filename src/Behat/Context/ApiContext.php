@@ -14,14 +14,16 @@ use Behat\Behat\Context\Context;
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Response;
+use Ynlo\GraphQLBundle\Behat\Client\ClientAwareInterface;
 use Ynlo\GraphQLBundle\Behat\Client\ClientAwareTrait;
+use Ynlo\GraphQLBundle\Behat\Storage\StorageAwareInterface;
 use Ynlo\GraphQLBundle\Behat\Storage\StorageAwareTrait;
 
 /**
  * Should be used as base class for API tests,
  * provide some helpful methods and direct access to de client
  */
-class ApiContext implements Context
+class ApiContext implements Context, ClientAwareInterface, StorageAwareInterface
 {
     use ClientAwareTrait;
     use StorageAwareTrait;

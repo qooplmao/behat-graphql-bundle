@@ -16,13 +16,14 @@ use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\AssertionFailedError;
 use Symfony\Component\HttpFoundation\Response;
+use Ynlo\GraphQLBundle\Behat\Client\ClientAwareInterface;
 use Ynlo\GraphQLBundle\Behat\Client\ClientAwareTrait;
 use Ynlo\GraphQLBundle\Util\Json;
 
 /**
  * Context to work with latest response
  */
-final class ResponseContext implements Context
+final class ResponseContext implements Context, ClientAwareInterface
 {
     use ClientAwareTrait;
 

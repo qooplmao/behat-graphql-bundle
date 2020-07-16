@@ -17,8 +17,10 @@ use Doctrine\ORM\EntityRepository;
 use PHPUnit\Framework\Assert;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
+use Ynlo\GraphQLBundle\Behat\Client\ClientAwareInterface;
 use Ynlo\GraphQLBundle\Behat\Client\ClientAwareTrait;
 use Ynlo\GraphQLBundle\Behat\Gherkin\YamlStringNode;
+use Ynlo\GraphQLBundle\Behat\Storage\StorageAwareInterface;
 use Ynlo\GraphQLBundle\Behat\Storage\StorageAwareTrait;
 
 /**
@@ -26,7 +28,7 @@ use Ynlo\GraphQLBundle\Behat\Storage\StorageAwareTrait;
  *
  * @property KernelInterface $kernel
  */
-final class DoctrineContext implements Context
+final class DoctrineContext implements Context, ClientAwareInterface, StorageAwareInterface
 {
     use ClientAwareTrait;
     use StorageAwareTrait;
