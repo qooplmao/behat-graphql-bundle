@@ -1,6 +1,6 @@
 {
-  "name": "ynloultratech/graphql-bundle",
-  "description": "Bundle designed to easily create API projects based on GraphQL",
+  "name": "qooplmao/behat-graphql-bundle",
+  "description": "Behat section taken from ynloultratech/graphql-bundle and updated for Symfony 5.*",
   "license": "MIT",
   "type": "symfony-bundle",
   "authors": [
