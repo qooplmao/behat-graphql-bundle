@@ -52,7 +52,7 @@ services:
     tags:
       - { name: 'tester.scenario.wrapper', priority: -99999 }
 
-  Ynlo\GraphQLBundle\Behat\Storage\KernelAwareInitializer:
+  Ynlo\GraphQLBundle\Behat\Kernel\KernelAwareInitializer:
     arguments:
       - '@tester.step'
       - '@fob_symfony.kernel'
