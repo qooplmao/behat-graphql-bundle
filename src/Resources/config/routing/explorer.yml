@@ -1,7 +1,0 @@
-api_explore:
-    path: /
-    controller: Ynlo\GraphQLBundle\Controller\ExplorerController::explorer
-
-api_explore_graphiql:
-    path: /graphiql
-    controller: Ynlo\GraphQLBundle\Controller\ExplorerController::graphiQL
