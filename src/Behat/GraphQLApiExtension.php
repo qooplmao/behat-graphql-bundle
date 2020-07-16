@@ -52,10 +52,10 @@ class GraphQLApiExtension implements Extension
 
     public function initialize(ExtensionManager $extensionManager)
     {
-        if (!$extensionManager->getExtension('symfony2')) {
+        if (!$extensionManager->getExtension('fob_symfony')) {
             throw new \RuntimeException(
-                'The behat "Symfony2Extension" is required to work with "GraphQLApiExtension". 
-Ensure you have "Behat\Symfony2Extension" inside your behat config file.'
+                'The behat "SymfonyExtension" is required to work with "GraphQLApiExtension". 
+Ensure you have "FriendsOfBehat\SymfonyExtension" inside your behat config file.'
             );
         }
     }

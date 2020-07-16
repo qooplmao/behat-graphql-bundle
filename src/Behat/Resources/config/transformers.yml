@@ -9,17 +9,22 @@ services:
       - { name: 'transformation.argument_transformer' }
 
   Ynlo\GraphQLBundle\Behat\Transformer\TransformAnyValueToString:
-    arguments: ['@Ynlo\GraphQLBundle\Behat\Transformer\TransformStringToExpression']
+    arguments:
+      - '@Ynlo\GraphQLBundle\Behat\Transformer\TransformStringToExpression'
     tags:
       - { name: 'transformation.argument_transformer' }
 
   Ynlo\GraphQLBundle\Behat\Transformer\TransformFixtureNameToObject:
-    arguments: ['@symfony2_extension.kernel', '@Ynlo\GraphQLBundle\Behat\Fixtures\FixtureManager']
+    arguments:
+      - '@fob_symfony.kernel'
+      - '@Ynlo\GraphQLBundle\Behat\Fixtures\FixtureManager'
     tags:
       - { name: 'transformation.argument_transformer' }
 
   Ynlo\GraphQLBundle\Behat\Transformer\TransformFixtureNameToGlobalId:
-    arguments: ['@symfony2_extension.kernel', '@Ynlo\GraphQLBundle\Behat\Fixtures\FixtureManager']
+    arguments:
+      - '@fob_symfony.kernel'
+      - '@Ynlo\GraphQLBundle\Behat\Fixtures\FixtureManager'
     tags:
       - { name: 'transformation.argument_transformer' }
 
