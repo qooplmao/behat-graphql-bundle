@@ -12,19 +12,17 @@ namespace Ynlo\GraphQLBundle\Behat\Context;
 
 use Behat\Behat\Context\Context;
 use Behat\Behat\Hook\Scope\BeforeStepScope;
-use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Ynlo\GraphQLBundle\Behat\Authentication\JWT\TokenGeneratorInterface;
 use Ynlo\GraphQLBundle\Behat\Authentication\UserResolverInterface;
-use Ynlo\GraphQLBundle\Behat\Client\ClientAwareInterface;
 use Ynlo\GraphQLBundle\Behat\Client\ClientAwareTrait;
 use Ynlo\GraphQLBundle\Behat\GraphQLApiExtension;
 
 /**
  * JWT Context
  */
-final class JWTContext implements Context, KernelAwareContext, ClientAwareInterface
+final class JWTContext implements Context
 {
     use ClientAwareTrait;
 

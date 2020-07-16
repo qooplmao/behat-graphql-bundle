@@ -26,13 +26,6 @@ services:
     tags:
       - { name: 'event_dispatcher.subscriber' }
 
-  Ynlo\GraphQLBundle\Behat\Context\Loader\ContextLoader:
-    arguments:
-      - '@tester.suite'
-      - '%graphql.contexts%'
-    tags:
-      - { name: 'tester.suite.wrapper' }
-
   Ynlo\GraphQLBundle\Behat\Client\GraphQLClient:
     arguments:
       - '@fob_symfony.kernel'
@@ -45,13 +38,6 @@ services:
     tags:
       - { name: 'event_dispatcher.subscriber' }
 
-  Ynlo\GraphQLBundle\Behat\Client\ClientAwareInitializer:
-    arguments:
-      - '@tester.scenario'
-      - '@Ynlo\GraphQLBundle\Behat\Client\GraphQLClient'
-    tags:
-      - { name: 'tester.scenario.wrapper', priority: -99999 }
-
   Ynlo\GraphQLBundle\Behat\Storage\Storage: ~
 
   Ynlo\GraphQLBundle\Behat\Storage\StorageResetSubscriber:
@@ -60,13 +46,48 @@ services:
     tags:
       - { name: 'event_dispatcher.subscriber' }
 
-  Ynlo\GraphQLBundle\Behat\Storage\StorageAwareInitializer:
-    arguments:
-      - '@tester.step'
-      - '@Ynlo\GraphQLBundle\Behat\Storage\Storage'
-    tags:
-      - { name: 'tester.step.wrapper', priority: -99999 }
-
   Ynlo\GraphQLBundle\Behat\Deprecation\DeprecationAdviser:
     tags:
         - { name: 'event_dispatcher.subscriber' }
+
+  Ynlo\GraphQLBundle\Behat\Context\ApiContext:
+    calls:
+      - [ setClient, [ '@Ynlo\GraphQLBundle\Behat\Client\GraphQLClient' ]]
+      - [ setStorage, [ '@Ynlo\GraphQLBundle\Behat\Storage\Storage' ]]
+
+  Ynlo\GraphQLBundle\Behat\Context\AssertContext: ~
+
+  Ynlo\GraphQLBundle\Behat\Context\DatabaseContext:
+    calls:
+      - [ setClient, [ '@Ynlo\GraphQLBundle\Behat\Client\GraphQLClient' ]]
+
+  Ynlo\GraphQLBundle\Behat\Context\DoctrineContext:
+    calls:
+      - [ setClient, [ '@Ynlo\GraphQLBundle\Behat\Client\GraphQLClient' ]]
+      - [ setStorage, [ '@Ynlo\GraphQLBundle\Behat\Storage\Storage' ]]
+
+  Ynlo\GraphQLBundle\Behat\Context\GraphQLContext:
+    calls:
+      - [ setClient, [ '@Ynlo\GraphQLBundle\Behat\Client\GraphQLClient' ]]
+
+  Ynlo\GraphQLBundle\Behat\Context\ResponseContext:
+    calls:
+      - [ setClient, [ '@Ynlo\GraphQLBundle\Behat\Client\GraphQLClient' ]]
+
+  Ynlo\GraphQLBundle\Behat\Context\StorageContext:
+    calls:
+      - [ setStorage, [ '@Ynlo\GraphQLBundle\Behat\Storage\Storage' ]]
+
+  Ynlo\GraphQLBundle\Behat\Context\JWTContext:
+    calls:
+      - [ setKernel, [ '@fob_symfony.kernel' ]]
+      - [ setClient, [ '@Ynlo\GraphQLBundle\Behat\Client\GraphQLClient' ]]
+
+  Ynlo\GraphQLBundle\Behat\Context\RouteContext:
+    calls:
+      - [ setKernel, [ '@fob_symfony.kernel' ]]
+      - [ setClient, [ '@Ynlo\GraphQLBundle\Behat\Client\GraphQLClient' ]]
+
+  Ynlo\GraphQLBundle\Behat\Context\SchemaSnapshotContext:
+    calls:
+      - [ setKernel, [ '@fob_symfony.kernel' ]]
