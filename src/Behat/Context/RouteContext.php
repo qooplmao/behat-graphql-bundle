@@ -12,29 +12,18 @@ namespace Ynlo\GraphQLBundle\Behat\Context;
 
 use Behat\Behat\Context\Context;
 use Behat\Behat\Hook\Scope\BeforeStepScope;
-use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Ynlo\GraphQLBundle\Behat\Client\ClientAwareInterface;
 use Ynlo\GraphQLBundle\Behat\Client\ClientAwareTrait;
 use Ynlo\GraphQLBundle\Behat\GraphQLApiExtension;
+use Ynlo\GraphQLBundle\Behat\Kernel\KernelAwareInterface;
+use Ynlo\GraphQLBundle\Behat\Kernel\KernelAwareTrait;
 
-final class RouteContext implements Context, KernelAwareContext, ClientAwareInterface
+final class RouteContext implements Context, KernelAwareInterface, ClientAwareInterface
 {
     use ClientAwareTrait;
-
-    /**
-     * @var Kernel
-     */
-    private $kernel;
-
-    /**
-     * @inheritDoc
-     */
-    public function setKernel(KernelInterface $kernel)
-    {
-        $this->kernel = $kernel;
-    }
+    use KernelAwareTrait;
 
     /**
      * @BeforeStep
