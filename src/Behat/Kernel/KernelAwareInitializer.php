@@ -10,54 +10,35 @@
 
 namespace Ynlo\GraphQLBundle\Behat\Kernel;
 
-use Behat\Behat\Context\Environment\InitializedContextEnvironment;
-use Behat\Behat\Tester\Result\StepResult;
-use Behat\Behat\Tester\StepTester;
-use Behat\Gherkin\Node\FeatureNode;
-use Behat\Gherkin\Node\StepNode;
-use Behat\Testwork\Environment\Environment;
+use Behat\Behat\Context\Context;
+use Behat\Behat\Context\Initializer\ContextInitializer;
 use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
  * Inject Storage instance on very context implementing StorageAwareInterface
  */
-class KernelAwareInitializer implements StepTester
+class KernelAwareInitializer implements ContextInitializer
 {
-    /**
-     * @var StepTester
-     */
-    private $baseTester;
-
     /**
      * @var KernelInterface
      */
     private $kernel;
 
-    public function __construct(StepTester $baseTester, KernelInterface $kernal)
+    /**
+     * @param KernelInterface $kernal
+     */
+    public function __construct(KernelInterface $kernal)
     {
-        $this->baseTester = $baseTester;
         $this->kernel = $kernal;
     }
 
-    public function setUp(Environment $env, FeatureNode $feature, StepNode $step, $skip)
+    /**
+     * @param Context $context
+     */
+    public function initializeContext(Context $context)
     {
-        return $this->baseTester->setUp($env, $feature, $step, $skip);
-    }
-
-    public function test(Environment $env, FeatureNode $feature, StepNode $step, $skip)
-    {
-        /** @var InitializedContextEnvironment $env */
-        foreach ($env->getContexts() as $context) {
-            if ($context instanceof KernelAwareInterface) {
-                $context->setKernel($this->kernel);
-            }
+        if ($context instanceof KernelAwareInterface) {
+            $context->setKernel($this->kernel);
         }
-
-        return $this->baseTester->test($env, $feature, $step, $skip);
-    }
-
-    public function tearDown(Environment $env, FeatureNode $feature, StepNode $step, $skip, StepResult $result)
-    {
-        return $this->baseTester->tearDown($env, $feature, $step, $skip, $result);
     }
 }

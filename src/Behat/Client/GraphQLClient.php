@@ -216,6 +216,8 @@ class GraphQLClient extends KernelBrowser
         $content = json_encode($data);
         $this->insulated = $this->config['insulated'] ?? false;
 
+        $this->server['CONTENT_TYPE'] = 'application/json';
+
         $this->sendRequest(Request::METHOD_POST, $this->getEndpoint(), $this->getRequestsParameters(), [], $this->getServerParameters(), $content);
 
         return $this->response = $this->getResponse();

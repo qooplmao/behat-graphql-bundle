@@ -10,53 +10,34 @@
 
 namespace Ynlo\GraphQLBundle\Behat\Storage;
 
-use Behat\Behat\Context\Environment\InitializedContextEnvironment;
-use Behat\Behat\Tester\Result\StepResult;
-use Behat\Behat\Tester\StepTester;
-use Behat\Gherkin\Node\FeatureNode;
-use Behat\Gherkin\Node\StepNode;
-use Behat\Testwork\Environment\Environment;
+use Behat\Behat\Context\Context;
+use Behat\Behat\Context\Initializer\ContextInitializer;
 
 /**
  * Inject Storage instance on very context implementing StorageAwareInterface
  */
-class StorageAwareInitializer implements StepTester
+class StorageAwareInitializer implements ContextInitializer
 {
-    /**
-     * @var StepTester
-     */
-    private $baseTester;
-
     /**
      * @var Storage
      */
     private $storage;
 
-    public function __construct(StepTester $baseTester, Storage $storage)
+    /**
+     * @param Storage $storage
+     */
+    public function __construct(Storage $storage)
     {
-        $this->baseTester = $baseTester;
         $this->storage = $storage;
     }
 
-    public function setUp(Environment $env, FeatureNode $feature, StepNode $step, $skip)
+    /**
+     * @param Context $context
+     */
+    public function initializeContext(Context $context)
     {
-        return $this->baseTester->setUp($env, $feature, $step, $skip);
-    }
-
-    public function test(Environment $env, FeatureNode $feature, StepNode $step, $skip)
-    {
-        /** @var InitializedContextEnvironment $env */
-        foreach ($env->getContexts() as $context) {
-            if ($context instanceof StorageAwareInterface) {
-                $context->setStorage($this->storage);
-            }
+        if ($context instanceof StorageAwareInterface) {
+            $context->setStorage($this->storage);
         }
-
-        return $this->baseTester->test($env, $feature, $step, $skip);
-    }
-
-    public function tearDown(Environment $env, FeatureNode $feature, StepNode $step, $skip, StepResult $result)
-    {
-        return $this->baseTester->tearDown($env, $feature, $step, $skip, $result);
     }
 }

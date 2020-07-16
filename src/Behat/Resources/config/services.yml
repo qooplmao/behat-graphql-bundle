@@ -26,13 +26,6 @@ services:
     tags:
       - { name: 'event_dispatcher.subscriber' }
 
-  Ynlo\GraphQLBundle\Behat\Context\Loader\ContextLoader:
-    arguments:
-      - '@tester.suite'
-      - '%graphql.contexts%'
-    tags:
-      - { name: 'tester.suite.wrapper' }
-
   Ynlo\GraphQLBundle\Behat\Client\GraphQLClient:
     arguments:
       - '@fob_symfony.kernel'
@@ -47,17 +40,13 @@ services:
 
   Ynlo\GraphQLBundle\Behat\Client\ClientAwareInitializer:
     arguments:
-      - '@tester.scenario'
       - '@Ynlo\GraphQLBundle\Behat\Client\GraphQLClient'
-    tags:
-      - { name: 'tester.scenario.wrapper', priority: -99999 }
+    tags: ['context.initializer']
 
   Ynlo\GraphQLBundle\Behat\Kernel\KernelAwareInitializer:
     arguments:
-      - '@tester.step'
       - '@fob_symfony.kernel'
-    tags:
-      - { name: 'tester.step.wrapper', priority: -99999 }
+    tags: ['context.initializer']
 
   Ynlo\GraphQLBundle\Behat\Storage\Storage: ~
 
@@ -69,10 +58,8 @@ services:
 
   Ynlo\GraphQLBundle\Behat\Storage\StorageAwareInitializer:
     arguments:
-      - '@tester.step'
       - '@Ynlo\GraphQLBundle\Behat\Storage\Storage'
-    tags:
-      - { name: 'tester.step.wrapper', priority: -99999 }
+    tags: ['context.initializer']
 
   Ynlo\GraphQLBundle\Behat\Deprecation\DeprecationAdviser:
     tags:
