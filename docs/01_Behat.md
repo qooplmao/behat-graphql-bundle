@@ -72,7 +72,6 @@ Install requirements in one step:
     composer require ynloultratech/behat-graphql-extension=dev-master \
                      behat/behat=^3.4 \
                      friends-of-behat/symfony-extension=^2.0 \
-                     "phpunit/phpunit=^6.0|^7.0|^8.0|^9.0" \
                      symfony/browser-kit=^5.0 \
                      --dev
 
