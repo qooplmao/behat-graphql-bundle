@@ -45,6 +45,19 @@ where the only that you need is change some placeholders, almost magical ;)
  
 # Requirements
 
+This package isn't registered on Packagist so the repository will need to be added to your `composer.json`.
+
+```
+{
+    // The rest of your composer.json
+
+    "repositories": [{
+        "type": "git",
+        "url": "https://github.com/qooplmao/behat-graphql-extension.git"
+    }]
+}
+```
+
 Must install the following requirements with composer to start using behat tests:
 
 - `behat/behat`: **Required**, is the core of Behat
@@ -56,11 +69,21 @@ Must install the following requirements with composer to start using behat tests
 
 Install requirements in one step:
 
-    composer require behat/behat=^3.4 friends-of-behat/symfony-extension=^2.0 "phpunit/phpunit=^6.0|^7.0|^8.0|^9.0" symfony/browser-kit=^5.0 --dev
+    composer require ynloultratech/behat-graphql-extension=dev-master \
+                     behat/behat=^3.4 \
+                     friends-of-behat/symfony-extension=^2.0 \
+                     "phpunit/phpunit=^6.0|^7.0|^8.0|^9.0" \
+                     symfony/browser-kit=^5.0 \
+                     --dev
+
+Note: You will probably get the warning `Adding phpunit/phpunit as a dependency is discouraged in favor of Symfony's PHPUnit Bridge`.
+`phpunit/phpunit` is required as the extension is currently using `PHPUnit\Framework\Assert`.
 
 Install optionals in one step:
 
-    composer require doctrine/doctrine-fixtures-bundle=^2.4 fzaninotto/faker=^1.7 --dev
+    composer require doctrine/doctrine-fixtures-bundle=^2.4 \
+                     fzaninotto/faker=^1.7 \
+                     --dev
     
 # Configuration
 
