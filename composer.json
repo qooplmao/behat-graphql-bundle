@@ -1,5 +1,5 @@
 {
-  "name": "qooplmao/behat-graphql-bundle",
+  "name": "ynloultratech/behat-graphql-extension",
   "description": "Behat section taken from ynloultratech/graphql-bundle and updated for Symfony 5.*",
   "license": "MIT",
   "type": "symfony-bundle",
