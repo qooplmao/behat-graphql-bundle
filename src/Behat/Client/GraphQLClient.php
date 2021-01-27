@@ -199,6 +199,14 @@ class GraphQLClient extends KernelBrowser
     }
 
     /**
+     * @return bool
+     */
+    public function hasResponse(): bool
+    {
+        return null !== $this->response;
+    }
+
+    /**
      * Send the configured query or mutation with given variables
      *
      * @return Response

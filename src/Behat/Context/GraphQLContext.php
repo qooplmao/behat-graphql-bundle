@@ -50,10 +50,16 @@ final class GraphQLContext implements Context, ClientAwareInterface
      */
     public function after(AfterStepScope $scope)
     {
-        if (!$scope->getTestResult()->isPassed()) {
-            if ($this->client->getResponse() && $this->client->getResponse()->getStatusCode() >= 400) {
-                $this->debugLastQuery();
-            }
+        if ($scope->getTestResult()->isPassed()) {
+            return;
+        }
+
+        if (!$this->client->hasResponse()) {
+            return;
+        }
+
+        if ($this->client->getResponse()->getStatusCode() >= 400) {
+            $this->debugLastQuery();
         }
     }
 
@@ -148,6 +154,10 @@ final class GraphQLContext implements Context, ClientAwareInterface
      */
     public function send()
     {
+        if (empty($this->client->getEndpoint())) {
+            throw new \Exception('No endpoint has been set in GraphQL client');
+        }
+
         $this->client->sendQuery();
     }
 
